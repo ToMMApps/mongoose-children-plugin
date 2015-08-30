@@ -1,7 +1,17 @@
 var Q = require('q');
 
+/**
+ *
+ * @param schema
+ * @param options Array of child definitions. For Example: {"model": "project", conditions: {"user": "this.id"}}. These properties
+ * will be used to search for the child.
+ */
 module.exports = function(schema, options){
 
+    /**
+     * Generates queries for child elements based on the overhanded options array.
+     * @returns {Array}
+     */
     function generateQueries(){
         var mongoose = require("mongoose");
         var queries = [];
@@ -39,14 +49,15 @@ module.exports = function(schema, options){
      * Can be used, for example, to collect all entries that belong to an user.
      * Be aware that this technique does have a bad performance and should therefore not be used quite often.
      * A model that has no children should call this method with an empty queries array.
-     * @param queries Array of promises that resolve to mongoose.Model instances.
      * @param recursive
      * @param cb
      * @returns {*|promise}
      */
     schema.methods.getChildren = function(recursive, cb){
         if(typeof recursive !== "boolean"){
-            return Q.reject(new TypeError("first arg must be a boolean"));
+            var err = new TypeError("first arg must be a boolean");
+            if(cb) cb(err);
+            return Q.reject(err);
         }
 
         var queries = generateQueries.apply(this);
@@ -79,10 +90,13 @@ module.exports = function(schema, options){
         });
     };
 
+    /**
+     * Removes all children on remove.
+     */
     schema.pre('remove', function(next){
         if(!this.getChildren){next();}
 
-        this.getChildren(true, function(err, children){
+        this.getChildren(false, function(err, children){
             if(err){
                 next(err);
             } else if(!children){
@@ -90,9 +104,26 @@ module.exports = function(schema, options){
             } else {
                 var promises = [];
                 children.forEach(function(child){
-                    promises.push(child.remove());
+                    function remove(){
+                        var deferred = Q.defer();
+                        child.remove(function (err) {
+                            if(err){
+                                deferred.reject(err);
+                            } else {
+                                deferred.resolve();
+                            }
+                        });
+
+                        return deferred.promise;
+                    }
+
+                    promises.push(remove());
                 });
-                Q.all(promises).then(next);
+                Q.all(promises).then(function () {
+                    next();
+                }, function (err) {
+                    next(err);
+                });
             }
         });
     });
