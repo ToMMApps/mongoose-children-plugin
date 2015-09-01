@@ -12,7 +12,6 @@ describe("index", function () {
     before(function (done) {
         mongoose.connect('mongodb://localhost/test', function (error) {
             if (error) throw error; // Handle failed connection
-            console.log('conn ready:  ' + mongoose.connection.readyState);
             done();
         });
     });
