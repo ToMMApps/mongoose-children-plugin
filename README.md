@@ -56,4 +56,8 @@ This can be done recursively, so if file would define children of its own, those
 Code-Quality
 --------------
 
-Code-coverage can be calculated by running "npm run cover" and npm test runs all mocha tests. 
+Current Jenkins report for this project:
+- ![BuildStatus](http://jenkins.tomm-apps.de/buildStatus/icon?job=mongoose-children-plugin)
+- ![Test](http://jenkins.tomm-apps.de:3434/badge/mongoose-children-plugin/test)
+- ![LastBuild](http://jenkins.tomm-apps.de:3434/badge/mongoose-children-plugin/lastbuild)
+- ![CodeCoverageInJenkins](http://jenkins.tomm-apps.de:3434/badge/mongoose-children-plugin/coverage)
