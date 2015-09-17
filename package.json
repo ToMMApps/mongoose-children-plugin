@@ -1,6 +1,6 @@
 {
   "name": "mongoose-children-plugin",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -9,10 +9,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@gitlab.tomm-apps.de:henning.gerrits/mongoose-children-plugin.git"
+    "url": "https://github.com/ToMMApps/mongoose-children-plugin.git"
   },
   "author": "Henning Gerrits",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "q": "^1.4.1"
   },
