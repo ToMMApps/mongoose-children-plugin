@@ -4,10 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha",
-    "coverage": "istanbul cover _mocha",
-    "mocha-junit-report": "mocha test --reporter mocha-junit-reporter",
-    "istanbul-cobertura-report": "istanbul cover -x test _mocha -report cobertura"
+    "test": "mocha test --reporter mocha-junit-reporter",
+    "cover": "istanbul cover -x test _mocha -report cobertura"
   },
   "repository": {
     "type": "git",
