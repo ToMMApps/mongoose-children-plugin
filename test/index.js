@@ -7,11 +7,7 @@ describe("index", function () {
     var plugin = require('../index');
 
     before(function (done) {
-        var host = process.env.MONGODB_HOST || 'localhost';
-        var port = process.env.MONGODB_PORT || 27017;
-        var database = process.env.MONGODB_DATABSE || 'mongoose-children-plugin-test';
-
-        var uri = "mongodb://" + host + ":" + port + "/" + database;
+        var uri = process.env.MONGODB_DB_URL || "mongodb://localhost:27017/mongoose-children-plugin-test";
 
         mongoose.connect(uri, function (error) {
             if (error) throw error; // Handle failed connection
