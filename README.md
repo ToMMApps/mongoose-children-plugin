@@ -56,6 +56,6 @@ equals the id of the parent project.
 
 This can be done recursively, so if file would define children of its own, those children would be resolved, too, when calling getChildren on a project instance.
 
-# License
+## License
 
 MIT
