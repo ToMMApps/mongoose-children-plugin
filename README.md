@@ -1,19 +1,22 @@
 # Mongoose-Children-Plugin
 Automatically resolves children of mongoose models.
 
-Installation
---------------
+![BuildStatus](http://jenkins.tomm-apps.de/buildStatus/icon?job=mongoose-children-plugin)
+![Test](http://jenkins.tomm-apps.de:3434/badge/mongoose-children-plugin/test)
+![LastBuild](http://jenkins.tomm-apps.de:3434/badge/mongoose-children-plugin/lastbuild)
+![CodeCoverageInJenkins](http://jenkins.tomm-apps.de:3434/badge/mongoose-children-plugin/coverage)
 
-```
+## Installation
+
+```javascript
 npm install mongoose-children-plugin
 ```
 
-Usage
-------------
+## Usage
 
 Assume you have two models: project and file.
 
-```
+```javascript
 var ProjectSchema = mongoose.Schema({
     name: {
         type: String,
@@ -52,12 +55,3 @@ When configured this way, calling getChildren on a project instance would resolv
 equals the id of the parent project.
 
 This can be done recursively, so if file would define children of its own, those children would be resolved, too, when calling getChildren on a project instance.
-
-Code-Quality
---------------
-
-Current Jenkins report for this project:
-- ![BuildStatus](http://jenkins.tomm-apps.de/buildStatus/icon?job=mongoose-children-plugin)
-- ![Test](http://jenkins.tomm-apps.de:3434/badge/mongoose-children-plugin/test)
-- ![LastBuild](http://jenkins.tomm-apps.de:3434/badge/mongoose-children-plugin/lastbuild)
-- ![CodeCoverageInJenkins](http://jenkins.tomm-apps.de:3434/badge/mongoose-children-plugin/coverage)
